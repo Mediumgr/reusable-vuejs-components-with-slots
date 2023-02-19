@@ -1,7 +1,6 @@
 <template>
   <ul class="userlist">
     <li v-for="item in list" :key="item.email">
-      <slot name="listitem" :user="item">
         <div class="card">
           <img
             class="resposive"
@@ -10,18 +9,17 @@
           />
           <div class="card-body">
             
-            <slot name="first" :text="item.name.first"></slot>
+            <slot name="first" :info="item.name.first"></slot>
 
-            <slot name="last" :text="item.name.last"></slot>
+            <slot name="last" :info="item.name.last"></slot>
 
-            <slot name="full" :text="`${item.name.first} ${item.name.last}`"></slot>
+            <slot name="full" :info="`${item.name.first} ${item.name.last}`"></slot>
 
-            <slot name="fullWithTitle" :text="`${item.name.title} ${item.name.first} ${item.name.last}`"></slot>
+            <slot name="fullWithTitle" :info="`${item.name.title} ${item.name.first} ${item.name.last}`"></slot>
 
             <slot name="secondrow" :item="item"></slot>
           </div>
         </div>
-      </slot>
     </li>
   </ul>
 </template>
@@ -30,8 +28,8 @@
 export default {
   props: {
     list: Array,
-    default: () => {}
-  }
+    default: () => {},
+  },
 };
 </script>
 

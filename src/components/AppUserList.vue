@@ -1,40 +1,21 @@
 
 <template>
-  <section>
-    <slot name="title">Users</slot>
-    <slot
-      name="userlist"
-      :count="data.results.length"
-      :list="data.results"
-      :remove="remove"
-      v-if="state === 'loaded'"
-    >
-      <ul class="userlist">
-        <li v-for="item in data.results" :key="item.email">
-          <slot name="listitem" :user="item">
-            <div>
-              <img
-                width="48"
-                height="48"
-                :src="item.picture.large"
-                :alt="item.name.first + ' ' + item.name.last"
-              />
-              <div>
-                <div>{{ item.name.first }}</div>
-                <slot name="secondrow" :item="item"></slot>
-              </div>
-            </div>
-          </slot>
-        </li>
-      </ul>
-    </slot>
-    <slot v-else name="loading">
-      loading...
-    </slot>
-    <slot v-if="state === 'failed'" name="error">
-      Oops, something went wrong.
-    </slot>
-  </section>
+    <section>
+        <slot>Users</slot>
+
+        <slot name="userlist" 
+        v-if="state === 'loaded'"
+        :list="data.results" 
+        ></slot>
+    
+        <slot v-else>
+          loading...
+        </slot>
+    
+        <slot v-if="state === 'failed'">
+          Oops, something went wrong.
+        </slot>
+    </section>
 </template>
 
 <script>
@@ -42,22 +23,22 @@ const states = {
   idle: "idle",
   loading: "loading",
   loaded: "loaded",
-  failed: "failed"
+  failed: "failed",
 };
 
 export default {
   props: {
     secondrow: {
       type: Function,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   data() {
     return {
       state: "idle",
       data: undefined,
       error: undefined,
-      states
+      states,
     };
   },
   mounted() {
@@ -83,9 +64,11 @@ export default {
       }
     },
     remove(item) {
-      this.data.results = this.data.results.filter(entry => entry.email !== item.email)
-    }
-  }
+      this.data.results = this.data.results.filter(
+        (entry) => entry.email !== item.email
+      );
+    },
+  },
 };
 </script>
 
@@ -93,6 +76,7 @@ export default {
 .userlist {
   margin: 10px;
 }
+
 .userlist img {
   border-radius: 50%;
   margin-right: 1rem;

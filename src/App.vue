@@ -14,8 +14,8 @@
     <AppUserList>
       <template #userlist="{list}">
         <AppUserCardsList :list="list">
-          <template #[selected]="{text}">
-            <h2>{{text}}</h2>
+          <template #[selected]="{info}">
+            <h2>{{info + '!!!!'}}</h2>
           </template>
         </AppUserCardsList>
       </template>
@@ -29,19 +29,19 @@ import AppUserCardsList from "@/components/AppUserCardsList";
 export default {
   components: {
     AppUserList,
-    AppUserCardsList
+    AppUserCardsList,
   },
   data() {
     return {
-      selected: 'first',
+      selected: "first",
       options: [
-        { value: 'first',  label: 'first name'},
-        { value: 'last',  label: 'last name'},
-        { value: 'full',  label: 'fullname'},
-        { value: 'fullWithTitle',  label: 'fullname with title'},
-      ]
-    }
-  }
+        { value: "first", label: "first name" },
+        { value: "last", label: "last name" },
+        { value: "full", label: "fullname" },
+        { value: "fullWithTitle", label: "fullname with title" },
+      ],
+    };
+  },
 };
 </script>
 
